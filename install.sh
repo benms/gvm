@@ -1,10 +1,10 @@
 #Install script
 
-if [ -z "${BASH_VERSION}" ] || [ -n "${ZSH_VERSION}" ]; then
-  # shellcheck disable=SC2016
-  echo >&2 'Error: the install instructions explicitly say to pipe the install script to `bash`; please follow them'
-  exit 1
-fi
+# if [ -z "${BASH_VERSION}" ] || [ -n "${ZSH_VERSION}" ]; then
+#   # shellcheck disable=SC2016
+#   echo >&2 'Error: the install instructions explicitly say to pipe the install script to `bash`; please follow them'
+#   exit 1
+# fi
 
 __gvm_get_shell_name() {
   echo "$SHELL" | awk '{n=split($1,A,"/"); print A[n]}'
