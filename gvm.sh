@@ -1,10 +1,3 @@
-# add to .zshrc or .zshrc
-# export GVM_DIR="$HOME/.gvm"
-# [ -s "$GVM_DIR/gvm.sh" ] && \. "$GVM_DIR/gvm.sh"  # This loads gvm
-# create dir - mkdir -p ~/.gvm
-# create dir - chmod +x ~/.gvm/gvm.sh
-
-
 __gvm_install() {
   local FILE=go$1.linux-amd64.tar.gz
   PATH_DIR_INST=$GVM_VERS_DIR/$1
