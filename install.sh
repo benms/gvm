@@ -2,7 +2,7 @@
 
 if [ -z "${BASH_VERSION}" ] || [ -n "${ZSH_VERSION}" ]; then
   # shellcheck disable=SC2016
-  nvm_echo >&2 'Error: the install instructions explicitly say to pipe the install script to `bash`; please follow them'
+  echo >&2 'Error: the install instructions explicitly say to pipe the install script to `bash`; please follow them'
   exit 1
 fi
 
