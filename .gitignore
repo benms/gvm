@@ -1,2 +1,4 @@
 .vscode
+.gvmrc
 versions
+*.tar.gz
