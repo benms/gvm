@@ -99,6 +99,7 @@ gvm-application() {
     return 0
   fi
   sed "${begin_line},${end_line}d" $SHELL_RC_FILE > ${SHELL_RC_FILE}_new; mv ${SHELL_RC_FILE}_new ${SHELL_RC_FILE}
+  __gvm_reload_shell
   echo "Application gvm successfully uninstalled"
  else
   echo "Command not found"
