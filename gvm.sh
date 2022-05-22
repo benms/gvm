@@ -75,7 +75,9 @@ __gvm_get_shell_name() {
 }
 
 __gvm_get_current_version() {
-  go version | awk '{print substr($3,3)}'
+  if [[ $(__gvm_has_cmd "go") ]]; then
+    go version | awk '{print substr($3,3)}'
+  fi
 }
 
 __gvm_info() {
