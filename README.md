@@ -24,11 +24,23 @@ go version go1.18.1 linux/amd64
 ```
 
 ## Install script
-For Bash
+
+```
+It's desirable that no Golang be preinstalled in system
+```
+
+
+For installation though the Bash run
 ```sh
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash
-```
-For Zsh
+``` 
+For installation though the Zsh run
 ```sh
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh
+```
+
+## Uninstall
+Run
+```sh
+gvm-application no-preserve-uninstall
 ```

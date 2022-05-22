@@ -36,7 +36,7 @@ __gvm_use() {
     export GO_VER=$1
   fi
   __gvm_reload_shell
-  go version && echo "Applied Go version" || echo "Not applied Go version"
+  go version && echo "Applied Go version $1" || echo "Not applied Go version $1"
 }
 
 __gvm_default() {
@@ -81,6 +81,28 @@ __gvm_get_current_version() {
 __gvm_info() {
   env | grep --color=never 'GO\|GVM'
   go version 2>/dev/null || echo "Golang is not installed"
+}
+
+gvm-application() {
+  local all_commands="no-preserve-uninstall"
+  if [[ -z "$1" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+  echo "GVM application help:"
+  echo " - no-preserve-uninstall - uninstall gvm application"
+  return 0
+ elif [[ $all_commands =~ (^|[[:space:]])$1($|[[:space:]]) ]]; then
+  sudo rm -rf $GVM_DIR 2>/dev/null || echo "Can't remove $GVM_DIR, probably it's already deleted"
+  local SHELL_RC_FILE=~/.$(__gvm_get_shell_name)rc
+  local begin_line=$(grep -n "#-begin-GVM-block-" $SHELL_RC_FILE| awk -F ':' '{print $1}'| head -n1)
+  local end_line=$(grep -n "#-end-GVM-block-" $SHELL_RC_FILE| awk -F ':' '{print $1}'| head -n1)
+  if [[ -z "$begin_line" ]] || [[ -z "$end_line" ]]; then
+    echo "Not found block in shell rc file"
+    return 0
+  fi
+  sed "${begin_line},${end_line}d" $SHELL_RC_FILE > ${SHELL_RC_FILE}_new; mv ${SHELL_RC_FILE}_new ${SHELL_RC_FILE}
+  echo "Application gvm successfully uninstalled"
+ else
+  echo "Command not found"
+ fi
 }
 
 gvm() {
