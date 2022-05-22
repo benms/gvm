@@ -3,7 +3,7 @@ Golang version manager
 
 ## Intro
 
-`gvm` allows you to quickly install and use different versions of node via the command line.
+`gvm` allows you to quickly install and use different versions of go via the command line.
 
 **Example:**
 ```sh
@@ -24,10 +24,11 @@ go version go1.18.1 linux/amd64
 ```
 
 ## Install script
+For Bash
 ```sh
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash
 ```
-
+For Zsh
 ```sh
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh
 ```
