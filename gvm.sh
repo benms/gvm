@@ -62,8 +62,8 @@ __gvm_rm() {
   if [[ "$VERS" = "$(__gvm_get_current_version)" ]]; then
     echo "You deleted current version, now you should switch to another version"
   fi
-  echo "Remove dir - $GVM_VERS_DIR/$VERS"
   rm -rf $GVM_VERS_DIR/$VERS/ 2>/dev/null || echo "Golang version not found"
+  echo "Successfully removed Golang version $VERS"
 }
 
 __gvm_has_cmd() {
@@ -81,7 +81,9 @@ __gvm_get_current_version() {
 }
 
 __gvm_info() {
+  echo "--- Env vars ---"
   env | grep --color=never 'GO\|GVM'
+  echo "--- Version info ---"
   go version 2>/dev/null || echo "Golang is not installed"
 }
 
