@@ -33,7 +33,10 @@ curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh
 ```
 
 ## Uninstall
-Run
+<details>
+<summary>Run</summary>
+
 ```sh
 gvm-application no-preserve-uninstall
 ```
+</details>
