@@ -115,14 +115,31 @@ gvm() {
  local commands_with_versions="default rm install"
 
  if [[ -z "$1" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
-  echo "GVM help:"
-  echo " - use <go-version> - use the version"
-  echo " - default <go-version> - set default the version"
-  echo " - info - show info about current version"
-  echo " - ls - list available installed versions that you can switch through the command use"
-  echo " - ls-remote - list available versions for installation"
-  echo " - install <go-version> - install go version"
-  echo " - rm <go-version> - remove installed go version"
+  __gvm_help_title
+  echo "Golang version manager"
+  echo "\nOptions:"
+  echo "  -h, --help\t\t\tShow this message and exit"
+  echo "\nUsage Examples:"
+  echo "   Install Golang version 1.17.10"
+  echo "   $ gvm install 1.17.10"
+  echo "\n   Set and use Golang version 1.17.10 as default"
+  echo "   $ gvm default 1.17.10"
+  echo "\n   Use Golang version 1.18.2 (works only for current terminal session)"
+  echo "   $ gvm use 1.18.2"
+  echo "\n   Show installed Golang versions available for switching"
+  echo "   $ gvm ls"
+  echo "\n   Show all versions that can be installed from go.dev repo"
+  echo "   $ gvm ls-remote"
+  echo "\n   Remove installed version"
+  echo "   $ gvm rm 1.18.2"
+  echo "\nCommands:"
+  echo "  use <version>\t\tuse the version"
+  echo "  default <version>\t\tset default the version"
+  echo "  info\t\t\t\tshow info about current version"
+  echo "  ls\t\t\t\tlist available installed versions that you can switch through the command use"
+  echo "  ls-remote\t\t\tlist available versions for installation"
+  echo "  install <version>\t\tinstall go version"
+  echo "  rm <version>\t\tremove installed go version"
   return 0
  elif [[ $commands_with_versions =~ (^|[[:space:]])$1($|[[:space:]]) ]] && [[ -z "$2" ]]; then
   echo "You should select Golang"
@@ -131,8 +148,18 @@ gvm() {
   sub_cmd=$(echo "$1" | sed -r 's/[-]+/_/g')
   __gvm_$sub_cmd $2
  else
-  echo "Command not found"
+  __gvm_no_such_command $1
  fi
+}
+
+__gvm_help_title() {
+  echo "Usage: gvm [OPTIONS] COMMAND [ARGS]..."
+}
+
+__gvm_no_such_command() {
+  __gvm_help_title
+  echo "Try 'gvm -h' for help"
+  echo "\nError: No such command '$1'"
 }
 
 # export GVM_DIR=~/.gvm
