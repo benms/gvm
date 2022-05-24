@@ -21,7 +21,15 @@ jobs:
     steps:      
       - uses: actions/checkout@v3
       
-      - name: Install gvm
+      - name: Install p1
+        shell: bash
+        run: |
+          mkdir -p $GVM_DIR          
+          chmod +x $GVM_DIR/gvm.sh
+          mkdir -p $GVM_DIR/versions
+          touch $GVM_DIR/.gvmrc
+      
+      - name: Install p2
         shell: bash        
         run: |
           script_content=$(cat ./gvm.sh && echo -e "\ngvm install 1.17.10\n")
