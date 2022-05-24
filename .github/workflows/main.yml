@@ -22,28 +22,5 @@ jobs:
       
       - name: Install nvm
         shell: bash
-        run: curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash
-        
-      - name: Reload bash
-        shell: bash
-        run: source ~/.bashrc
-
-      - name: Install Golang version 1.17.10
-        shell: bash
-        run: gvm install 1.17.10
-        
-      - name: set as default 1.17.10
-        shell: bash
-        run: gvm use 1.17.10
-        
-      - name: Get go version
-        shell: bash
-        run: go version
-        
-      - name: Show list of installed versions
-        shell: bash
-        run: gvm ls
-        
-      - name: Show list of installed versions
-        shell: bash
-        run: gvm info
+        run: |
+          curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | tee && echo "gvm install 1.17.10; gvm use 1.17.10;gvm info" | bash        
