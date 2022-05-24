@@ -25,7 +25,6 @@ jobs:
         shell: bash
         run: |
           mkdir -p $GVM_DIR          
-          chmod +x $GVM_DIR/gvm.sh
           mkdir -p $GVM_DIR/versions
           touch $GVM_DIR/.gvmrc
       
