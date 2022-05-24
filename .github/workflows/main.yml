@@ -33,5 +33,5 @@ jobs:
         shell: bash
         run: |
           cat ./gvm.sh >> $BASH_PROFILE
-          echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm info\n" >> $BASH_PROFILE
+          echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm ls\n gvm info\n gvm rm 1.17.10\n" >> $BASH_PROFILE
           source $BASH_PROFILE
