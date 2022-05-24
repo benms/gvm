@@ -35,16 +35,3 @@ jobs:
           cat ./gvm.sh >> $BASH_PROFILE
           echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm info\n" >> $BASH_PROFILE
           source $BASH_PROFILE
-
-      # - name: Run gvm commands
-      #   shell: bash
-      #   run: gvm install 1.17.10
-
-      # - name: Run gvm commands
-      #   shell: bash
-      #   run: |
-      #     gvm use 1.17.10
-
-      - name: Run gvm commands
-        shell: bash
-        run: gvm info
