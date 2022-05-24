@@ -31,9 +31,9 @@ jobs:
       - name: Install p2 and run
         shell: bash
         run: |
-          script_content=$(cat ./gvm.sh && echo -e "\n gvm install 1.17.10\n\n gvm default 1.17.10\n\n gvm info\n")
-          echo $script_content >> ~/.bash_profile
-          source ~/.bash_profile
+          cat ./gvm.sh >> "$HOME/.bash_profile"
+          echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm info\n" >> "$HOME/.bash_profile"
+          source "$HOME/.bash_profile"
 
       # - name: Run gvm commands
       #   shell: bash
