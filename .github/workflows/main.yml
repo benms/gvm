@@ -11,6 +11,7 @@ on:
 
 env:
   GVM_DIR: "$HOME/.gvm"
+  BASH_PROFILE: "$HOME/.bash_profile"
 
 jobs:
 
@@ -31,9 +32,9 @@ jobs:
       - name: Install p2 and run
         shell: bash
         run: |
-          cat ./gvm.sh >> "$HOME/.bash_profile"
-          echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm info\n" >> "$HOME/.bash_profile"
-          source "$HOME/.bash_profile"
+          cat ./gvm.sh >> $BASH_PROFILE
+          echo -e "\n gvm install 1.17.10\n gvm default 1.17.10\n gvm info\n" >> $BASH_PROFILE
+          source $BASH_PROFILE
 
       # - name: Run gvm commands
       #   shell: bash
