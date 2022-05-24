@@ -33,7 +33,7 @@ jobs:
         run: |
           script_content=$(cat ./gvm.sh && echo -e "\n gvm install 1.17.10\n\n gvm default 1.17.10\n\n gvm info\n")
           echo $script_content >> ~/.bash_profile
-          source ~/.bash_profile
+          bash ~/.bash_profile
 
       # - name: Run gvm commands
       #   shell: bash
