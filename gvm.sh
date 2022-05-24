@@ -50,11 +50,13 @@ __gvm_reload_shell() {
 }
 
 __gvm_ls() {
-  ls -1 $GVM_VERS_DIR
+  echo "GVM Installed versions:"
+  ls -1 $GVM_VERS_DIR|sort -V -r|awk '{printf "\t"$0"\n"}'
 }
 
 __gvm_ls_remote() {
- curl -s $GO_DOWNLOAD_URL| grep "class=\"download\"" | grep linux-amd64 | awk 'match($0, /go[1-9]\.[0-9a-z]+\.?[0-9]+/) { print substr( $0, RSTART, RLENGTH )}'|less
+ echo "Loading available for installing versions..."
+ curl -s $GO_DOWNLOAD_URL| grep "class=\"download\"" | grep linux-amd64 | awk 'match($0, /go[1-9]\.[0-9a-z]+\.?[0-9]+/) { print substr( $0, RSTART, RLENGTH )}'|sort -V -r|awk '{printf "\t"substr($0,3)"\n"}'|less -X
 }
 
 __gvm_rm() {
