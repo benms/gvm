@@ -8,10 +8,12 @@ on:
     branches: [ main ]
 
   workflow_dispatch:
-
+  
+env:
+  GVM_DIR: "$HOME/.gvm"
 
 jobs:
- 
+  
   build:
     
     runs-on: ubuntu-latest
@@ -20,9 +22,9 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Install gvm
-        shell: bash
+        shell: bash        
         run: |
-          script_content=$(echo -e "\nexport GVM_DIR=\"$HOME/.gvm\"\n" && cat ./gvm.sh && echo -e "\ngvm install 1.17.10\n")
+          script_content=$(cat ./gvm.sh && echo -e "\ngvm install 1.17.10\n")
           echo $script_content > ~/.bash_profile
           source ~/.bash_profile
         
