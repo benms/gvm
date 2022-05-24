@@ -7,13 +7,13 @@ __gvm_install() {
   PATH_ARCH=$GVM_DIR/$FILE
   if [[ ! -f "$PATH_ARCH" ]]; then
     URL=$GO_DOWNLOAD_URL$FILE
-    curl -L --output "$PATH_ARCH $URL"
+    curl -L --output "$PATH_ARCH" "$URL"
   fi
   mkdir -p "$PATH_DIR_INST"
   tar -C "$PATH_DIR_INST" -xvf "$PATH_ARCH"
   mkdir -p "$PATH_DIR_INST/$GVM_VENDORS_DIR_NAME"
   rm "$PATH_ARCH"
-  echo "Successfully installed Go version $1"
+  printf "Successfully installed Go version %s\n" "$1"
 }
 
 __gvm_install_files() {
@@ -65,11 +65,11 @@ __gvm_ls_remote() {
 }
 
 __gvm_rm() {
-  local VERS="$1"
+  local VERS="${1:?}"
   if [[ "$VERS" = "$(__gvm_get_current_version)" ]]; then
     echo "You deleted current version, now you should switch to another version"
   fi
-  rm -rf "${GVM_VERS_DIR:?}/${VERS:?}/" 2>/dev/null || echo "Golang version not found"
+  rm -rf "$GVM_VERS_DIR/$VERS/" 2>/dev/null || echo "Golang version not found"
   echo "Successfully removed Golang version $VERS"
 }
 

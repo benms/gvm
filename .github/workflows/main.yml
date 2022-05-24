@@ -45,6 +45,6 @@ jobs:
       #   run: |
       #     gvm use 1.17.10
 
-      # - name: Run gvm commands
-      #   shell: bash
-      #   run: gvm info
+      - name: Run gvm commands
+        shell: bash
+        run: gvm info
