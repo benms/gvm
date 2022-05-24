@@ -41,7 +41,9 @@ jobs:
 
       - name: Run gvm commands
         shell: bash
-        run: gvm use 1.17.10
+        run: |
+          source ~/.bash_profile
+          gvm use 1.17.10
 
       - name: Run gvm commands
         shell: bash
