@@ -23,10 +23,10 @@ jobs:
         shell: bash
         run: |
           script_content=$(echo -e "\nexport GVM_DIR=\"$HOME/.gvm\"\n" && cat ./gvm.sh)
-          echo -e $script_content > ~/.bash_profile
+          echo $script_content > ~/.bash_profile
         
       - name: Run gvm commands
-        shell: bash
+        shell: bash {0}
         run: gvm install 1.17.10        
         
       - name: Run gvm commands
