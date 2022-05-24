@@ -16,22 +16,22 @@ jobs:
     
     runs-on: ubuntu-latest
 
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    steps:      
       - uses: actions/checkout@v3
       
       - name: Install gvm
         shell: bash
-        run: source ./install.sh
+        run: echo "export GVM_DIR=\"$HOME/.gvm\"" && cat ./gvm.sh > 
         
       - name: Install gvm p2
         shell: bash
-        run: source ~/.bashrc
+        run: |
+          script_content=$(echo -e "\nexport GVM_DIR=\"$HOME/.gvm\"\n" && cat ./gvm.sh)
+          echo -e $script_content > ~/.bash_profile
         
       - name: Run gvm commands
         shell: bash
-        run: gvm install 1.17.10
-        
+        run: gvm install 1.17.10        
         
       - name: Run gvm commands
         shell: bash
