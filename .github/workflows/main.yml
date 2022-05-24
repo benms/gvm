@@ -31,7 +31,7 @@ jobs:
       - name: Install p2
         shell: bash
         run: |
-          script_content=$(cat ./gvm.sh && echo -e "\ngvm install 1.17.10\n")
+          script_content=$(cat ./gvm.sh && echo -e "\ngvm install 1.17.10\n" && echo -e "\ngvm default 1.17.10\n" && echo -e "\ngvm info\n")
           echo $script_content >> ~/.bash_profile
           source ~/.bash_profile
 
@@ -39,12 +39,11 @@ jobs:
       #   shell: bash
       #   run: gvm install 1.17.10
 
-      - name: Run gvm commands
-        shell: bash
-        run: |
-          source ~/.bash_profile
-          gvm use 1.17.10
+      # - name: Run gvm commands
+      #   shell: bash
+      #   run: |
+      #     gvm use 1.17.10
 
-      - name: Run gvm commands
-        shell: bash
-        run: gvm info
+      # - name: Run gvm commands
+      #   shell: bash
+      #   run: gvm info
