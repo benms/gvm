@@ -21,10 +21,6 @@ jobs:
       
       - name: Install gvm
         shell: bash
-        run: echo "export GVM_DIR=\"$HOME/.gvm\"" && cat ./gvm.sh > 
-        
-      - name: Install gvm p2
-        shell: bash
         run: |
           script_content=$(echo -e "\nexport GVM_DIR=\"$HOME/.gvm\"\n" && cat ./gvm.sh)
           echo -e $script_content > ~/.bash_profile
