@@ -24,6 +24,10 @@ jobs:
         shell: bash
         run: source ./install.sh
         
+      - name: Install gvm p2
+        shell: bash
+        run: source ~/.bashrc
+        
       - name: Run gvm commands
         shell: bash
         run: gvm install 1.17.10
