@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code for usage test
       - uses: actions/checkout@v3
 
       - name: Install
@@ -43,18 +42,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install for install-test
+      - name: Install
         shell: bash
         run: |
           curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
 
-  # lint:
+  lint:
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout code for linter
-  #       uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Run ShellCheck
-  #       uses: azohra/shell-linter@latest
+      - name: Run ShellCheck
+        uses: azohra/shell-linter@latest
