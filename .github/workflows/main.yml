@@ -24,9 +24,8 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          export GVM_DIR="$HOME/.gvm"
-          mkdir -p "$GVM_DIR/versions"
-          touch $GVM_DIR/.gvmrc
+          mkdir -p "$HOME/.gvm/versions"
+          touch "$HOME/.gvm/.gvmrc"
           cat ./gvm.sh >> "$HOME/.bash_profile"
 
       - name: Run usage
