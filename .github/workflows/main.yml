@@ -15,8 +15,7 @@ env:
 
 jobs:
 
-  usage-tests:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +28,12 @@ jobs:
           touch "$GVM_DIR/.gvmrc"
           cat ./gvm.sh >> "$HOME/.bash_profile"
 
+  usage-tests:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Run usage
         shell: bash
         run: |
@@ -56,12 +61,11 @@ jobs:
           source "$HOME/.bashrc"
 
   linters:
+    needs: build
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
         if: always()
