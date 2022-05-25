@@ -10,19 +10,19 @@ on:
   workflow_dispatch:
 
 env:
-  GVM_DIR: "$HOME/.gvm"
-  GVM_VERSIONS: "$GVM_DIR/versions"
-  GVM_RC: "$GVM_DIR/.gvmrc"
-  BASH_PROFILE: "$HOME/.bash_profile"
-  BASH_RC: "$HOME/.bashrc"
   GO_INSTALL_VER: "1.17.10"
-  INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
 jobs:
 
   usage-test:
 
     runs-on: ubuntu-latest
+
+    env:
+      GVM_DIR: "$HOME/.gvm"
+      GVM_VERSIONS: "$GVM_DIR/versions"
+      GVM_RC: "$GVM_DIR/.gvmrc"
+      BASH_PROFILE: "$HOME/.bash_profile"
 
     steps:
       - uses: actions/checkout@v3
@@ -52,6 +52,13 @@ jobs:
   install-test:
 
     runs-on: ubuntu-latest
+
+    env:
+      GVM_DIR: "$HOME/.gvm"
+      GVM_VERSIONS: "$GVM_DIR/versions"
+      GVM_RC: "$GVM_DIR/.gvmrc"
+      BASH_RC: "$HOME/.bashrc"
+      INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
     steps:
       - name: Install
