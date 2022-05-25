@@ -11,8 +11,12 @@ on:
 
 env:
   GVM_DIR: "$HOME/.gvm"
+  GVM_VERSIONS: "GVM_DIR/versions"
+  GVM_RC: "$GVM_DIR/.gvmrc"
   BASH_PROFILE: "$HOME/.bash_profile"
+  BASH_RC: "$HOME/.bashrc"
   GO_INSTALL_VER: "1.17.10"
+  INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
 jobs:
 
@@ -26,15 +30,23 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          mkdir -p $GVM_DIR
-          mkdir -p $GVM_DIR/versions
-          touch $GVM_DIR/.gvmrc
+          mkdir -p $GVM_VERSIONS
+          touch $GVM_RC
           cat ./gvm.sh >> $BASH_PROFILE
 
       - name: Run usage
         shell: bash
         run: |
-          echo -e "\n gvm install $GO_INSTALL_VER\n gvm default $GO_INSTALL_VER\n gvm ls\n gvm info\n gvm rm $GO_INSTALL_VER\n" >> $BASH_PROFILE
+          {
+            echo "gvm default $GO_INSTALL_VER"
+            echo "========"
+            echo "gvm ls"
+            echo "========"
+            echo "gvm info"
+            echo "========"
+            echo "gvm rm $GO_INSTALL_VER"
+            echo "========"
+          } >> "$BASH_PROFILE"
           source $BASH_PROFILE
 
   install-test:
@@ -45,16 +57,26 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
+          curl -o- $INSTALL_URL | bash
+          {
+            echo "gvm default $GO_INSTALL_VER"
+            echo "========"
+            echo "gvm ls"
+            echo "========"
+            echo "gvm info"
+            echo "========"
+            echo "gvm rm $GO_INSTALL_VER"
+            echo "========"
+          } >> "$BASH_RC"
+          source $BASH_RC
 
   lint:
 
     runs-on: ubuntu-latest
-
-    allow-failure: true
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
+        if: always()
