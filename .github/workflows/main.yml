@@ -17,9 +17,11 @@ env:
 jobs:
 
   usage-test:
+    
     runs-on: ubuntu-latest
+   
     steps:
-      - name: Checkout code
+      - name: Checkout code for usage test
       - uses: actions/checkout@v3
 
       - name: Install
@@ -37,7 +39,9 @@ jobs:
           source $BASH_PROFILE
 
   install-test:
+    
     runs-on: ubuntu-latest
+    
     steps:
       - name: Install
         shell: bash
@@ -45,10 +49,12 @@ jobs:
           curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
 
   lint:
+    
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
+      - name: Checkout code for linter
+        uses: actions/checkout@v3
 
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
