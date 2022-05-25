@@ -6,6 +6,7 @@ __gvm_get_shell_name() {
 }
 
 __gvm_reload_shell() {
+  # shellcheck source=/dev/null
   source "$HOME/.$(__gvm_get_shell_name)rc"
 }
 
