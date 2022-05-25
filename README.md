@@ -25,11 +25,11 @@ Golang version manager
 
 For installation though the Bash run
 ```sh
-curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash
+curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
 ```
 For installation though the Zsh run
 ```sh
-curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh
+curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh && . ~/.zshrc
 ```
 
 ## Uninstalling
