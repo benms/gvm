@@ -21,28 +21,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install
-        shell: bash
-        run: |
-          mkdir -p "$GVM_DIR/versions"
-          touch "$GVM_DIR/.gvmrc"
-          cat ./gvm.sh >> "$HOME/.bash_profile"
-
   usage-tests:
 
     runs-on: ubuntu-latest
     needs: build
 
     steps:
+      - name: Install
+        shell: bash
+        run: |
+          mkdir -p "$GVM_DIR/versions"
+          touch "$GVM_DIR/.gvmrc"
+          cat ./gvm.sh >> "$HOME/.bash_profile"
       - name: Run usage
         shell: bash
         run: |
-          pwd
-          ls
-          ls -al $HOME
-          # ls -al $GVM_DIR
-          cat ~/.bashrc
-          cat ~/.bash_profile
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
@@ -64,6 +57,7 @@ jobs:
         shell: bash
         run: |
           curl -o- $INSTALL_URL | bash
+          echo -e "gvm install $GO_INSTALL_VER\n" >> $HOME/.bashrc"
           source "$HOME/.bashrc"
 
   linters:
