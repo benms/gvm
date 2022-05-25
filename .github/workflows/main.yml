@@ -26,9 +26,9 @@ jobs:
         run: |
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
+          cat ./gvm.sh >> "$HOME/.bash_profile"
 
   usage-tests:
-    needs: build
 
     runs-on: ubuntu-latest
 
@@ -36,10 +36,10 @@ jobs:
       - name: Run usage
         shell: bash
         run: |
-          ls -l $HOME
-          cat ./gvm.sh
-          cat "$HOME/.bash_profile"
-          cat ./gvm.sh >> "$HOME/.bash_profile"
+          pwd
+          ls
+          ls -al $HOME
+          ls -al $GVM_DIR
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
@@ -64,11 +64,12 @@ jobs:
           source "$HOME/.bashrc"
 
   linters:
-    needs: build
 
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
         if: always()
