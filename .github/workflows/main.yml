@@ -53,22 +53,17 @@ jobs:
         shell: bash
         run: |
           curl -o- $INSTALL_URL | bash
-          echo -e "gvm install $GO_INSTALL_VER\n" >> $HOME/.bashrc"
           source "$HOME/.bashrc"
 
   linters:
 
     runs-on: ubuntu-latest
-    needs:
-      - usage-tests
-      - install-tests
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Run ShellCheck
         uses: azohra/shell-linter@latest
-        if: always()
 
   check:
     if: always()
