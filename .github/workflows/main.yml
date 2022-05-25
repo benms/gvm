@@ -41,6 +41,8 @@ jobs:
           ls
           ls -al $HOME
           ls -al $GVM_DIR
+          cat ~/.bashrc
+          cat ~/.bash_profile
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
