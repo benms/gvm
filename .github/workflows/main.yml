@@ -33,6 +33,7 @@ jobs:
         shell: bash
         run: |
           {
+            echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
             echo -e "gvm ls\n"
             echo -e "gvm info\n"
@@ -53,6 +54,7 @@ jobs:
         run: |
           curl -o- $INSTALL_URL | bash
           {
+            echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
             echo -e "gvm ls\n"
             echo -e "gvm info\n"
