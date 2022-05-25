@@ -36,6 +36,9 @@ jobs:
       - name: Run usage
         shell: bash
         run: |
+          ls -l $HOME
+          cat ./gvm.sh
+          cat "$HOME/.bash_profile"
           cat ./gvm.sh >> "$HOME/.bash_profile"
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
