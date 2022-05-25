@@ -11,7 +11,7 @@ on:
 
 env:
   GVM_DIR: "$HOME/.gvm"
-  GVM_VERSIONS: "GVM_DIR/versions"
+  GVM_VERSIONS: "$GVM_DIR/versions"
   GVM_RC: "$GVM_DIR/.gvmrc"
   BASH_PROFILE: "$HOME/.bash_profile"
   BASH_RC: "$HOME/.bashrc"
