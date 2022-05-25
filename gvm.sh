@@ -69,8 +69,10 @@ __gvm_rm() {
   if [[ "$VERS" = "$(__gvm_get_current_version)" ]]; then
     echo "You deleted current version, now you should switch to another version"
   fi
-  rm -rf "$GVM_VERS_DIR/$VERS/" 2>/dev/null || echo "Golang version not found"
-  echo "Successfully removed Golang version $VERS"
+  local RM_FILE
+  RM_FILE="$GVM_VERS_DIR/$VERS/"
+  RM_FILE="${RM_FILE:?}"
+  sudo rm -rf "$RM_FILE" 2>/dev/null && echo "Successfully removed Golang version $VERS" || echo "Golang version not found"
 }
 
 __gvm_has_cmd() {
