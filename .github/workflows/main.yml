@@ -40,7 +40,7 @@ jobs:
           pwd
           ls
           ls -al $HOME
-          ls -al $GVM_DIR
+          # ls -al $GVM_DIR
           cat ~/.bashrc
           cat ~/.bash_profile
           {
