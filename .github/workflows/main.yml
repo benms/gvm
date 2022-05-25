@@ -16,23 +16,33 @@ env:
 
 jobs:
 
-  build:
+  usage-test:
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install p1
+      - name: Install
         shell: bash
         run: |
           mkdir -p $GVM_DIR
           mkdir -p $GVM_DIR/versions
           touch $GVM_DIR/.gvmrc
+          cat ./gvm.sh >> $BASH_PROFILE
 
-      - name: Install p2 and run
+      - name: Run usage
         shell: bash
         run: |
-          cat ./gvm.sh >> $BASH_PROFILE
           echo -e "\n gvm install $GO_INSTALL_VER\n gvm default $GO_INSTALL_VER\n gvm ls\n gvm info\n gvm rm $GO_INSTALL_VER\n" >> $BASH_PROFILE
           source $BASH_PROFILE
+
+  install-test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Install
+        shell: bash
+        run: |
+          curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
