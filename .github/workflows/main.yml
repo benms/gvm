@@ -33,14 +33,10 @@ jobs:
         shell: bash
         run: |
           {
-            echo "gvm default $GO_INSTALL_VER"
-            echo "#========"
-            echo "gvm ls"
-            echo "#========"
-            echo "gvm info"
-            echo "#========"
-            echo "gvm rm $GO_INSTALL_VER"
-            echo "#========"
+            echo -e "gvm default $GO_INSTALL_VER\n"
+            echo -e "gvm ls\n"
+            echo -e "gvm info\n"
+            echo -e "gvm rm $GO_INSTALL_VER\n"
           } >> "$HOME/.bash_profile"
           source "$HOME/.bash_profile"
 
@@ -57,14 +53,10 @@ jobs:
         run: |
           curl -o- $INSTALL_URL | bash
           {
-            echo "gvm default $GO_INSTALL_VER"
-            echo "#========"
-            echo "gvm ls"
-            echo "#========"
-            echo "gvm info"
-            echo "#========"
-            echo "gvm rm $GO_INSTALL_VER"
-            echo "#========"
+            echo -e "gvm default $GO_INSTALL_VER\n"
+            echo -e "gvm ls\n"
+            echo -e "gvm info\n"
+            echo -e "gvm rm $GO_INSTALL_VER\n"
           } >> "$HOME/.bashrc"
           source "$HOME/.bashrc"
 
