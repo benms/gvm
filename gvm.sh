@@ -56,7 +56,7 @@ __gvm_reload_shell() {
 
 __gvm_ls() {
   echo "GVM Installed versions:"
-  ls -1 "$GVM_VERS_DIR" | sort -V -r | awk '{printf "\t"$0"\n"}'
+  find "${GVM_VERS_DIR}" -maxdepth 1 -mindepth 1 -type d -printf "\t%f\n" | sort -V -r
 }
 
 __gvm_ls_remote() {
