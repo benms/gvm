@@ -24,15 +24,17 @@ jobs:
   usage-tests:
 
     runs-on: ubuntu-latest
-    needs: build
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Install
         shell: bash
         run: |
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
           cat ./gvm.sh >> "$HOME/.bash_profile"
+
       - name: Run usage
         shell: bash
         run: |
