@@ -3,30 +3,28 @@ setup() {
     GVM_DIR="$HOME/.gvm"
     PATH="$GVM_DIR:$PATH"
     GO_VER="1.17.10"
-}
 
-@test "can run curl install script" {
-    [ $(curl -o- $INSTALL_URL | $(command -v bash)) ]
+    curl -o- $INSTALL_URL | bash
 }
 
 @test "gvm dir exists" {
-    [ -d $GVM_DIR ]
+    [ -d "$GVM_DIR" ]
 }
 
 @test "gvm version dir exists" {
-    [ -d $GVM_DIR/versions ]
+    [ -d "$GVM_DIR/versions" ]
 }
 
 @test "gvm script exists" {
-    [ -e $GVM_DIR/gvm.sh ]
+    [ -e "$GVM_DIR/gvm.sh" ]
 }
 
 @test "gvmrc file exists" {
-    [ -e $GVM_DIR/.gvmrc ]
+    [ -e "$GVM_DIR/.gvmrc" ]
 }
 
 @test "can run gvm install" {
-    echo "PATH - $PATH"
+    echo "PATH - $PATH, GVM_DIR - $GVM_DIR"
     run gvm install $GO_VER
     [ $status -eq 0 ]
 }
