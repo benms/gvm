@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-# Linter: https://www.shellcheck.net/
-
 __gvm_install() {
   local FILE=go$1.linux-amd64.tar.gz
   PATH_DIR_INST=$GVM_VERS_DIR/$1
