@@ -1,8 +1,9 @@
 setup() {
     INSTALL_URL="https://raw.githubusercontent.com/benms/gvm/main/install.sh"
     GVM_DIR="$HOME/.gvm"
-    PATH="$GVM_DIR:$PATH"
     GO_VER="1.17.10"
+
+    source "$GVM_DIR/gvm.sh"
 }
 
 @test "gvm dir exists" {
