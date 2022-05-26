@@ -59,8 +59,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # env:
-      # INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
+    env:
+      INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
     steps:
       - uses: actions/setup-node@v3
