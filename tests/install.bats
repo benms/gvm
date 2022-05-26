@@ -23,12 +23,12 @@ setup() {
     [ -e "$GVM_DIR/.gvmrc" ]
 }
 
-@test "check command v gvm" {
-    result=$(command -v gvm)
-    [ "$result" == "gvm" ]
-}
+#@test "check command v gvm" {
+#    result=$(command -v gvm)
+#    [ "$result" == "gvm" ]
+#}
 
-@test "can run gvm install" {
-    run gvm install $GO_VER
-    [ $status -eq 0 ]
-}
+#@test "can run gvm install" {
+#    run gvm install $GO_VER
+#    [ $status -eq 0 ]
+#}
