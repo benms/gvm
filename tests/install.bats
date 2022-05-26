@@ -6,9 +6,11 @@ setup() {
 }
 
 @test "can run curl install script" {
-    [ ! $(curl -o- $INSTALL_URL | bash) ]
+    [ $(curl -o- $INSTALL_URL | bash) ]
     [ -d $GVM_DIR ]
-    [ -e $GVM_DIR/.gvm.sh ]
+    [ -d $GVM_DIR/versions ]
+    [ -e $GVM_DIR/gvm.sh ]
+    [ -e $GVM_DIR/.gvmrc ]
 }
 
 @test "can run gvm install" {
