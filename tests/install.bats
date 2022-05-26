@@ -23,7 +23,6 @@ setup() {
 }
 
 @test "can run gvm install" {
-    echo "PATH - $PATH, GVM_DIR - $GVM_DIR"
     run gvm install $GO_VER
     [ $status -eq 0 ]
 }
