@@ -3,7 +3,7 @@ setup() {
     GVM_DIR="$HOME/.gvm"
     GO_VER="1.17.10"
 
-    source "$GVM_DIR/gvm.sh"
+    [ -s "$GVM_DIR/gvm.sh" ] && \. "$GVM_DIR/gvm.sh" || echo "GVM sh not found"
 }
 
 @test "gvm dir exists" {
