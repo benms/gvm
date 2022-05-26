@@ -63,6 +63,14 @@ jobs:
       INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
     steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '15'
+
+      - run: npm install -g bats
+
+      - run: bats -v
+
       - name: Install
         shell: bash
         run: |
