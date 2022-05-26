@@ -5,6 +5,6 @@ setup() {
 }
 
 @test "can run curl install script" {
-    run curl -o- $INSTALL_URL | zsh
+    run $(curl -o- $INSTALL_URL | zsh)
     assert_output 'Welcome to our project!'
 }
