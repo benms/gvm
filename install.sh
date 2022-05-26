@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-# Linter: https://www.shellcheck.net/
-
 __gvm_get_shell_name() {
   echo "$SHELL" | awk '{n=split($1,A,"/"); print A[n]}'
 }
