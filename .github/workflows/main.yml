@@ -59,8 +59,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
+    # env:
+      # INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
 
     steps:
       - uses: actions/setup-node@v3
@@ -69,13 +69,14 @@ jobs:
 
       - run: npm install -g bats
 
-      - run: bats -v
-
-      - name: Install
+      # - name: Install
+      #   shell: bash
+      #   run: |
+      #     curl -o- $INSTALL_URL | bash
+      #     source "$HOME/.bashrc"
+      - name: Run tests
         shell: bash
-        run: |
-          curl -o- $INSTALL_URL | bash
-          source "$HOME/.bashrc"
+        run: bats ./tests/install.bats
 
   linters:
 
