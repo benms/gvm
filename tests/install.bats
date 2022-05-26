@@ -14,6 +14,7 @@ setup() {
 }
 
 @test "can run gvm install" {
+    echo "PATH - $PATH"
     run gvm install $GO_VER
     [ "$status" -eq 0 ]
 }
