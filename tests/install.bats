@@ -15,6 +15,7 @@ setup() {
 }
 
 @test "gvm script exists" {
+    cat $GVM_DIR/gvm.sh
     [ -e "$GVM_DIR/gvm.sh" ]
 }
 
