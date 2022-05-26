@@ -71,11 +71,12 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      # - name: Install
-      #   shell: bash
-      #   run: |
-      #     curl -o- $INSTALL_URL | bash
-      #     source "$HOME/.bashrc"
+      - name: Install
+        shell: bash
+        run: |
+          curl -o- $INSTALL_URL | bash
+
+
       - name: Run tests
         shell: bash
         run: bats ./tests/install.bats

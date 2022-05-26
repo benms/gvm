@@ -3,8 +3,6 @@ setup() {
     GVM_DIR="$HOME/.gvm"
     PATH="$GVM_DIR:$PATH"
     GO_VER="1.17.10"
-
-    curl -o- $INSTALL_URL | bash
 }
 
 @test "gvm dir exists" {
