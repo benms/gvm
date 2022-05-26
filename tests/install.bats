@@ -7,9 +7,21 @@ setup() {
 
 @test "can run curl install script" {
     [ $(curl -o- $INSTALL_URL | $(command -v bash)) ]
+}
+
+@test "gvm dir exists" {
     [ -d $GVM_DIR ]
+}
+
+@test "gvm version dir exists" {
     [ -d $GVM_DIR/versions ]
+}
+
+@test "gvm script exists" {
     [ -e $GVM_DIR/gvm.sh ]
+}
+
+@test "gvmrc file exists" {
     [ -e $GVM_DIR/.gvmrc ]
 }
 
