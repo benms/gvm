@@ -24,13 +24,13 @@ setup() {
     [ -e "$GVM_DIR/.gvmrc" ]
 }
 
-@test "Begin block($BEGIN_BLOCK) exists in $SH_RC file" {
+@test "Begin block($BEGIN_BLOCK) exists in RC file" {
     run grep "$BEGIN_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
     [ "$output" == "$BEGIN_BLOCK" ]
 }
 
-@test "End block($END_BLOCK) exists in $SH_RC file" {
+@test "End block($END_BLOCK) exists in RC file" {
     run grep "$END_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
     [ "$output" == "$END_BLOCK" ]
@@ -59,6 +59,7 @@ setup() {
 @test "can run gvm ls and expected count of lines eq 2" {
     run gvm ls
     [ $status -eq 0 ]
+    echo "Debug: $output"
     [ "$(echo $output| wc -l)" -eq 2 ]
 }
 
