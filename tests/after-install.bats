@@ -59,7 +59,7 @@ setup() {
 @test "can run gvm ls and expected count of lines eq 2" {
     run gvm ls
     [ $status -eq 0 ]
-    echo "Debug: $output"
+    echo "Debug:($(echo $output| wc -l) $output)"
     [ "$(echo $output| wc -l)" -eq 2 ]
 }
 
