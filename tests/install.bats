@@ -24,7 +24,7 @@ setup() {
 }
 
 @test "curl to https://raw.githubusercontent.com/benms/gvm/main/gvm.sh should have status code 404" {
-    result=(curl -I https://raw.githubusercontent.com/benms/gvm/main/gvm.sh | tee | grep -i http/2 | awk '{print $2}')
+    result=$(curl -I https://raw.githubusercontent.com/benms/gvm/main/gvm.sh | tee | grep -i http/2 | awk '{print $2}')
     [ "$result" == "404" ]
 }
 
