@@ -23,12 +23,12 @@ setup() {
     [ -e "$GVM_DIR/.gvmrc" ]
 }
 
-@test "curl to $GVM_SH_URL should have status code 404" {
+@test "curl to $GVM_SH_URL should have status code $EXPECT_DOWNLOAD_STATUS_CODE" {
     result=$(curl -I $GVM_SH_URL | tee | grep -i http/2 | awk '{print $2}')
     [ "$result" == "$EXPECT_DOWNLOAD_STATUS_CODE" ]
 }
 
-@test "curl to $INSTALL_URL should have status code 404" {
+@test "curl to $INSTALL_URL should have status code $EXPECT_DOWNLOAD_STATUS_CODE" {
     result=$(curl -I $INSTALL_URL | tee | grep -i http/2 | awk '{print $2}')
     [ "$result" == "$EXPECT_DOWNLOAD_STATUS_CODE" ]
 }
