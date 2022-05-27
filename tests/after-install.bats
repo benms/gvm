@@ -1,13 +1,9 @@
 setup() {
     GVM_DIR="$HOME/.gvm"
-    GO_VER="1.17.10"
     SH_NAME=$(echo $SHELL | awk '{n=split($1,A,"/"); print A[n]}')
     SH_RC="$HOME/.${SH_NAME}rc"
-    BEGIN_BLOCK="#-begin-GVM-block-"
-    END_BLOCK="#-end-GVM-block-"
 
-    echo "SH_NAME - $SH_NAME, GO_VER - $GO_VER, SH_RC - $SH_RC"
-
+    echo "Debug line: SH_NAME - $SH_NAME, GO_INSTALL_VER - $GO_INSTALL_VER, SH_RC - $SH_RC"
     [ -s "$GVM_DIR/gvm.sh" ] && \. "$GVM_DIR/gvm.sh" || echo "GVM sh not found"
 }
 
@@ -55,8 +51,8 @@ setup() {
     [ "$result" == "gvm" ]
 }
 
-@test "can run gvm install $GO_VER" {
-    run gvm install $GO_VER
+@test "can run gvm install $GO_INSTALL_VER" {
+    run gvm install $GO_INSTALL_VER
     [ $status -eq 0 ]
 }
 
@@ -71,8 +67,8 @@ setup() {
     [ $status -eq 0 ]
 }
 
-@test "can run $rm $GO_VER" {
-    run gvm rm $GO_VER
+@test "can run $rm $GO_INSTALL_VER" {
+    run gvm rm $GO_INSTALL_VER
     [ $status -eq 0 ]
 }
 
