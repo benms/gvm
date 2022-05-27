@@ -86,7 +86,7 @@ jobs:
 
       - name: Run tests
         shell: bash
-        run: bats ./tests/install.bats
+        run: bats ./tests/after-install.bats
 
   linters:
 

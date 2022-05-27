@@ -21,7 +21,6 @@ export SHELL_URL=https://raw.githubusercontent.com/benms/gvm/main/gvm.sh
 
 mkdir -p "$GVM_DIR"
 curl -L --output "$GVM_DIR/gvm.sh" "$SHELL_URL"
-# chmod +x "$GVM_DIR/gvm.sh"
 mkdir -p "$GVM_DIR/versions"
 touch "$GVM_DIR/.gvmrc"
 
