@@ -79,8 +79,8 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          cp ./gvm.sh "$(echo $GVM_DIR)/"
           cat ./install.sh | bash
+          cp ./gvm.sh "$(echo $GVM_DIR)/"
 
       - name: Run tests
         shell: bash
