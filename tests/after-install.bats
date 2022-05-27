@@ -2,10 +2,12 @@ setup() {
     INSTALL_URL="https://raw.githubusercontent.com/benms/gvm/main/install.sh"
     GVM_DIR="$HOME/.gvm"
     GO_VER="1.17.10"
-    SH_NAME=$(echo "$SHELL" | awk '{n=split($1,A,"/"); print A[n]}')
+    SH_NAME=$(echo $SHELL | awk '{n=split($1,A,"/"); print A[n]}')
     SH_RC="$HOME/.${SH_NAME}rc"
     BEGIN_BLOCK="#-begin-GVM-block-"
     END_BLOCK="#-end-GVM-block-"
+
+    echo "SH_NAME - $SH_NAME, GO_VER - $GO_VER, SH_RC - $SH_RC"
 
     [ -s "$GVM_DIR/gvm.sh" ] && \. "$GVM_DIR/gvm.sh" || echo "GVM sh not found"
 }
@@ -27,13 +29,13 @@ setup() {
     [ -e "$GVM_DIR/.gvmrc" ]
 }
 
-@test "Begin block exists in $SH_RC file" {
+@test "Begin block($BEGIN_BLOCK) exists in $SH_RC file" {
     run grep "$BEGIN_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
     [ "$output" == "$BEGIN_BLOCK" ]
 }
 
-@test "End block exists in $SH_RC file" {
+@test "End block($END_BLOCK) exists in $SH_RC file" {
     run grep "$END_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
     [ "$output" == "$END_BLOCK" ]
