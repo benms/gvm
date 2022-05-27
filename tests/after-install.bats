@@ -63,7 +63,7 @@ setup() {
 @test "can run gvm ls and expected count of lines eq 2" {
     run gvm ls
     [ $status -eq 0 ]
-    [ "$(echo '$output'| wc -l)" -eq 2 ]
+    [ "$(echo $output| wc -l)" -eq 2 ]
 }
 
 @test "can run gvm info" {
@@ -79,5 +79,5 @@ setup() {
 @test "can run gvm ls and expected count of lines eq 1" {
     run gvm ls
     [ $status -eq 0 ]
-    [ "$(echo '$output'| wc -l)" -eq 1 ]
+    [ "$(echo $output| wc -l)" -eq 1 ]
 }
