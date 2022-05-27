@@ -28,12 +28,32 @@ setup() {
     [ "$result" == "404" ]
 }
 
+@test "curl to $INSTALL_URL should have status code 404" {
+    result=$(curl -I $INSTALL_URL | tee | grep -i http/2 | awk '{print $2}')
+    [ "$result" == "404" ]
+}
+
 @test "check command v gvm" {
     result=$(command -v gvm)
     [ "$result" == "gvm" ]
 }
 
-@test "can run gvm install" {
+@test "can run gvm install $GO_VER" {
     run gvm install $GO_VER
+    [ $status -eq 0 ]
+}
+
+@test "can run gvm ls" {
+    run gvm ls
+    [ $status -eq 0 ]
+}
+
+@test "can run gvm info" {
+    run gvm ls
+    [ $status -eq 0 ]
+}
+
+@test "can run $rm $GO_VER" {
+    run gvm rm $GO_VER
     [ $status -eq 0 ]
 }
