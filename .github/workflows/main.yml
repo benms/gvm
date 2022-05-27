@@ -61,7 +61,7 @@ jobs:
     env:
       INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
       GVM_SH_URL: "https://raw.githubusercontent.com/benms/gvm/main/gvm.sh"
-      EXPECT_DOWNLOAD_STATUS_CODE: "404"
+      EXPECT_DOWNLOAD_STATUS_CODE: "200" #404
       BEGIN_BLOCK: "#-begin-GVM-block-"
       END_BLOCK: "#-end-GVM-block-"
 
