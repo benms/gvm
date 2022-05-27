@@ -47,8 +47,8 @@ setup() {
 }
 
 @test "check command v gvm" {
-    result=$(command -v gvm)
-    [ "$result" == "gvm" ]
+    run command -v gvm
+    [ "$output" == "gvm" ]
 }
 
 @test "can run gvm install $GO_INSTALL_VER" {
@@ -76,4 +76,16 @@ setup() {
     run gvm ls
     [ $status -eq 0 ]
     [ "$(echo $output| wc -l)" -eq 1 ]
+}
+
+
+@test "can run uninstall application" {
+    run gvm-application no-preserve-uninstall
+    [ $status -eq 0 ]
+    [ "$(echo $output| wc -l)" -eq 1 ]
+}
+
+@test "command v gvm status should be 1" {
+    run command -v gvm
+    [ "$status" -eq 1 ]
 }

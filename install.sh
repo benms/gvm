@@ -18,7 +18,7 @@ export SHELL_URL=https://raw.githubusercontent.com/benms/gvm/main/gvm.sh
   printf "[ -s \"\$GVM_DIR/gvm.sh\" ] && \. \"\$GVM_DIR/gvm.sh\"\n"
   printf "#-end-GVM-block-\n"
 } >> "$RC_FILE"
-
+1
 mkdir -p "$GVM_DIR"
 curl -L --output "$GVM_DIR/gvm.sh" "$SHELL_URL"
 mkdir -p "$GVM_DIR/versions"
