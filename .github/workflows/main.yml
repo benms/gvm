@@ -79,9 +79,7 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          pwd
-          ls -al ./
-          cp ./gvm.sh $GVM_DIR/
+          cp ./gvm.sh "$GVM_DIR/"
           cat ./install.sh | bash
 
       - name: Run tests
