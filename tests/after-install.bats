@@ -1,5 +1,4 @@
 setup() {
-    INSTALL_URL="https://raw.githubusercontent.com/benms/gvm/main/install.sh"
     GVM_DIR="$HOME/.gvm"
     GO_VER="1.17.10"
     SH_NAME=$(echo $SHELL | awk '{n=split($1,A,"/"); print A[n]}')
