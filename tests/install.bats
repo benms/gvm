@@ -23,14 +23,14 @@ setup() {
     [ -e "$GVM_DIR/.gvmrc" ]
 }
 
-@test "curl to https://raw.githubusercontent.com/benms/gvm/main/gvm.sh should have status code 404" {
-    result=$(curl -I https://raw.githubusercontent.com/benms/gvm/main/gvm.sh | tee | grep -i http/2 | awk '{print $2}')
-    [ "$result" == "404" ]
+@test "curl to $GVM_SH_URL should have status code 404" {
+    result=$(curl -I $GVM_SH_URL | tee | grep -i http/2 | awk '{print $2}')
+    [ "$result" == "$EXPECT_DOWNLOAD_STATUS_CODE" ]
 }
 
 @test "curl to $INSTALL_URL should have status code 404" {
     result=$(curl -I $INSTALL_URL | tee | grep -i http/2 | awk '{print $2}')
-    [ "$result" == "404" ]
+    [ "$result" == "$EXPECT_DOWNLOAD_STATUS_CODE" ]
 }
 
 @test "check command v gvm" {

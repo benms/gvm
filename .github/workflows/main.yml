@@ -61,6 +61,8 @@ jobs:
 
     env:
       INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
+      GVM_SH_URL: "https://raw.githubusercontent.com/benms/gvm/main/gvm.sh"
+      EXPECT_DOWNLOAD_STATUS_CODE: "404"
 
     steps:
       - uses: actions/setup-node@v3
