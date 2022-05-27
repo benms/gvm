@@ -22,12 +22,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install
-        shell: bash
-        run: |
-          mkdir -p "$GVM_DIR/versions"
-          touch "$GVM_DIR/.gvmrc"
-          cat ./gvm.sh >> "$HOME/.bash_profile"
+      # - name: Install
+      #   shell: bash
+      #   run: |
+      #     mkdir -p "$GVM_DIR/versions"
+      #     touch "$GVM_DIR/.gvmrc"
 
   usage-tests:
 
@@ -88,7 +87,6 @@ jobs:
 
       - name: Run tests
         shell: bash
-        # run: bats ./tests/after-install.bats
         run: bats --verbose-run ./tests/after-install.bats
 
   linters:
