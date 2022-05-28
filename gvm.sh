@@ -3,12 +3,22 @@
 
 __gvm_install() {
   local FILE=go$1.linux-amd64.tar.gz
-  PATH_DIR_INST=$GVM_VERS_DIR/$1
-  PATH_ARCH=$GVM_DIR/$FILE
-  if [[ ! -f "$PATH_ARCH" ]]; then
-    URL=$GO_DOWNLOAD_URL$FILE
-    curl -L --output "$PATH_ARCH" "$URL"
+  local PATH_DIR_INST=$GVM_VERS_DIR/$1
+  local PATH_ARCH=$GVM_DIR/$FILE
+  if [[ -d "$PATH_DIR_INST" ]]; then
+    echo "Go verion $1 is already exists"
+    return 1
   fi
+  local URL=$GO_DOWNLOAD_URL$FILE
+  local STATUS_CODE=$(curl -LIs $URL | tee | grep -i http/2 | awk '{print $2}'| tail -n1)
+  if [[ "$STATUS_CODE" -eq 404 ]]; then
+    echo "Go version $1 not found in repo"
+    return 1
+  elif [[ "$STATUS_CODE" -ge 400 ]]; then
+    echo "Repo connection error"
+    return 1
+  fi
+  curl -L --output "$PATH_ARCH" "$URL"
   mkdir -p "$PATH_DIR_INST"
   tar -C "$PATH_DIR_INST" -xvf "$PATH_ARCH"
   mkdir -p "$PATH_DIR_INST/$GVM_VENDORS_DIR_NAME"
@@ -37,7 +47,7 @@ __gvm_use() {
     echo "Go version is already $1"
     return 1
   elif [[ ! -d "$GVM_VERS_DIR/$1" ]]; then
-    echo "Can't use Go version $1, because it's not found in installed list"
+    echo "Can't use Go version $1 because it's not found in installed list"
     return 1
   else
     export GO_VER="$1"
@@ -74,10 +84,14 @@ __gvm_rm() {
   if [[ "$VERS" = "$(__gvm_get_current_version)" ]]; then
     echo "You deleted current version, now you should switch to another version"
   fi
-  local RM_FILE
-  RM_FILE="$GVM_VERS_DIR/$VERS/"
-  RM_FILE="${RM_FILE:?}"
-  sudo rm -rf "$RM_FILE" 2>/dev/null && echo "Successfully removed Golang version $VERS" || echo "Golang version not found"
+  local RM_DIR
+  RM_DIR="$GVM_VERS_DIR/$VERS/"
+  RM_DIR="${RM_DIR:?}"
+  if [[ ! -d  "$RM_DIR" ]]; then
+    echo "Go version $1 not found"
+    return 1
+  fi
+  sudo rm -rf "$RM_DIR" 2>/dev/null && echo "Successfully removed Golang version $VERS" || echo "Golang version not found"
 }
 
 __gvm_has_cmd() {
