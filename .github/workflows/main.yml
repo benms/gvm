@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -55,7 +55,7 @@ jobs:
             echo -e "gvm ls\n"
             echo -e "gvm info\n"
             echo -e "gvm rm $GO_INSTALL_VER\n"
-            #echo -e "gvm-application no-preserve-uninstall\n"
+            echo -e "#gvm-application no-preserve-uninstall\n"
           } >> "$HOME/.bash_profile"
           source "$HOME/.bash_profile"
 
