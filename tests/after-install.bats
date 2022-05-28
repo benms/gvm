@@ -83,6 +83,8 @@ setup() {
     [ $status -eq 0 ]
     expect_msg="Applied Go version $GO_INSTALL_VER"
     actual_msg=$(echo $output| tail -n1)
+    echo "expect_msg - $expect_msg"
+    echo "actual_msg - $actual_msg"
     [ "$actual_msg" == "$expect_msg" ]
 }
 
