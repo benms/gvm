@@ -56,7 +56,7 @@ setup() {
     run gvm install $WRONG_VERSION
     [ $status -eq 1 ]
     ERR_MSG="Go version $WRONG_VERSION not found in repo"
-    [ "$output" == "ERR_MSG" ]
+    [ "$output" == "$ERR_MSG" ]
 }
 
 @test "can run gvm install $GO_INSTALL_VER" {
@@ -82,7 +82,8 @@ setup() {
     run gvm use $GO_INSTALL_VER
     [ $status -eq 0 ]
     expect_msg="Applied Go version $GO_INSTALL_VER"
-    [ "$(echo $output| tail -n1)" == "$expect_msg" ]
+    actual_msg=$(echo $output| tail -n1)
+    [ "$actual_msg" == "$expect_msg" ]
 }
 
 @test "Can use default version $GO_INSTALL_VER" {
@@ -115,7 +116,7 @@ setup() {
 
 @test "Got error when try rm wrong version $WRONG_VERSION" {
     run gvm rm $WRONG_VERSION
-    [ $status -eq 0 ]
+    [ $status -eq 1 ]
     [ "$output" == "Go version $WRONG_VERSION not found" ]
 }
 
