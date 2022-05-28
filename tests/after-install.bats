@@ -85,7 +85,6 @@ setup() {
     actual_msg=$(echo $output| tail -n1)
     echo "expect_msg - $expect_msg"
     echo "actual_msg - $actual_msg"
-    [ "$actual_msg" == "$expect_msg" ]
     [[ -n $(echo "$actual_msg" | grep "$expect_msg") ]]
 }
 
