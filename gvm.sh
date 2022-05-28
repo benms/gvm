@@ -10,7 +10,8 @@ __gvm_install() {
     return 1
   fi
   local URL=$GO_DOWNLOAD_URL$FILE
-  local STATUS_CODE=$(curl -LIs $URL | tee | grep -i http/2 | awk '{print $2}'| tail -n1)
+  local STATUS_CODE
+  STATUS_CODE=$(curl -LIs "$URL" | tee | grep -i http/2 | awk '{print $2}'| tail -n1)
   if [[ "$STATUS_CODE" -eq 404 ]]; then
     echo "Go version $1 not found in repo"
     return 1
