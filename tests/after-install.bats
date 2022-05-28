@@ -148,5 +148,5 @@ setup() {
 @test "End block($END_BLOCK) doesnt exist in RC file" {
     run grep "$END_BLOCK" $SH_RC
     [ "$status" -eq 1 ]
-    [ -z "$output" == "$END_BLOCK" ]
+    [ -z "$output" ]
 }
