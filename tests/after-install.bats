@@ -28,13 +28,13 @@ setup() {
 @test "Begin block($BEGIN_BLOCK) exists in RC file" {
     run grep "$BEGIN_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
-    [ "$output" == "$BEGIN_BLOCK" ]
+    [ -n "$output" ]
 }
 
 @test "End block($END_BLOCK) exists in RC file" {
     run grep "$END_BLOCK" $SH_RC
     [ "$status" -eq 0 ]
-    [ "$output" == "$END_BLOCK" ]
+    [ -n "$output" ]
 }
 
 @test "curl to $GVM_SH_URL should have status code $EXPECT_DOWNLOAD_STATUS_CODE" {
@@ -137,4 +137,16 @@ setup() {
 @test "command v gvm status should be 1" {
     run command -v gvm
     [ "$status" -eq 1 ]
+}
+
+@test "Begin block($BEGIN_BLOCK) doesnt exist in RC file" {
+    run grep "$BEGIN_BLOCK" $SH_RC
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+}
+
+@test "End block($END_BLOCK) doesnt exist in RC file" {
+    run grep "$END_BLOCK" $SH_RC
+    [ "$status" -eq 0 ]
+    [ -z "$output" == "$END_BLOCK" ]
 }
