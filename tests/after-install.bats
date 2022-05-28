@@ -82,9 +82,7 @@ setup() {
     run gvm use $GO_INSTALL_VER
     [ $status -eq 0 ]
     expect_msg="Applied Go version $GO_INSTALL_VER"
-    echo "Expect - $expect_msg"
-    echo "Output - $output"
-    [ "$output" == "$expect_msg" ]
+    [ "$(echo $output| tail -n1)" == "$expect_msg" ]
 }
 
 @test "Can use default version $GO_INSTALL_VER" {
@@ -115,7 +113,7 @@ setup() {
     [ $status -eq 0 ]
 }
 
-@test "can run rm $WRONG_VERSION" {
+@test "Got error when try rm wrong version $WRONG_VERSION" {
     run gvm rm $WRONG_VERSION
     [ $status -eq 0 ]
     [ "$output" == "Go version $WRONG_VERSION not found" ]
