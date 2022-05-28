@@ -35,11 +35,14 @@ __gvm_use() {
     GO_VER="$(__gvm_get_dir_version "$PWD")"
   elif [[ "$1" == "$(__gvm_get_current_version)" ]]; then
     echo "Go version is already $1"
-    return 1
+    return
+  elif [[ ! -d "$GVM_VERS_DIR/$1" ]]; then
+    echo "Can't use Go version $1, because it's not found in installed list"
+    return
   else
     export GO_VER="$1"
   fi
-  __gvm_reload_shell
+  __gvm_reload_shell || echo "Can't reload shell"
   go version && echo "Applied Go version $1" || echo "Not applied Go version $1"
 }
 
@@ -53,7 +56,7 @@ __gvm_reload_shell() {
   local RC_FILE
   RC_FILE="$HOME/.$(__gvm_get_shell_name)rc"
   # shellcheck source=/dev/null
-  [ -f "RC_FILE" ] && source "$RC_FILE"
+  [ -f "$RC_FILE" ] && source "$RC_FILE"
 }
 
 __gvm_ls() {
