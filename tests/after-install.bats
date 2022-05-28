@@ -54,7 +54,7 @@ setup() {
 
 @test "can't install wrong version $WRONG_VERSION" {
     run gvm install $WRONG_VERSION
-    [ $status -eq 0 ]
+    [ $status -eq 1 ]
     ERR_MSG="Go version $WRONG_VERSION not found in repo"
     [ "$output" == "ERR_MSG" ]
 }
@@ -64,16 +64,16 @@ setup() {
     [ $status -eq 0 ]
 }
 
-@test "got message when try install $GO_INSTALL_VER again" {
+@test "got error message when try install $GO_INSTALL_VER again" {
     run gvm install $GO_INSTALL_VER
-    [ $status -eq 0 ]
+    [ $status -eq 1 ]
     ERR_MSG="Go verion $GO_INSTALL_VER is already exists"
     [ "$output" == "$ERR_MSG" ]
 }
 
 @test "Can't use wrong version $WRONG_VERSION" {
     run gvm use $WRONG_VERSION
-    [ $status -eq 0 ]
+    [ $status -eq 1 ]
     expect_msg="Can't use Go version $WRONG_VERSION because it's not found in installed list"
     [ "$output" == "$expect_msg" ]
 }
@@ -82,6 +82,8 @@ setup() {
     run gvm use $GO_INSTALL_VER
     [ $status -eq 0 ]
     expect_msg="Applied Go version $GO_INSTALL_VER"
+    echo "Expect - $expect_msg"
+    echo "Output - $output"
     [ "$output" == "$expect_msg" ]
 }
 
@@ -124,7 +126,6 @@ setup() {
     [ $status -eq 0 ]
     [ "$(echo $output| wc -l)" -eq 1 ]
 }
-
 
 @test "can run uninstall application" {
     run gvm-application no-preserve-uninstall
