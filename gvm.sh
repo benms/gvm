@@ -35,10 +35,10 @@ __gvm_use() {
     GO_VER="$(__gvm_get_dir_version "$PWD")"
   elif [[ "$1" == "$(__gvm_get_current_version)" ]]; then
     echo "Go version is already $1"
-    return
+    return 1
   elif [[ ! -d "$GVM_VERS_DIR/$1" ]]; then
     echo "Can't use Go version $1, because it's not found in installed list"
-    return
+    return 1
   else
     export GO_VER="$1"
   fi
@@ -117,7 +117,7 @@ gvm-application() {
     end_line=$(grep -n "#-end-GVM-block-" "$SHELL_RC_FILE" | awk -F ':' '{print $1}' | head -n1)
     if [[ -z "$begin_line" ]] || [[ -z "$end_line" ]]; then
       echo "Not found block in shell rc file"
-      return 0
+      return 1
     fi
     sed "${begin_line},${end_line}d" "$SHELL_RC_FILE" >"${SHELL_RC_FILE}_new"
     mv "${SHELL_RC_FILE}_new" "${SHELL_RC_FILE}"
@@ -125,6 +125,7 @@ gvm-application() {
     echo "Application gvm successfully uninstalled"
   else
     echo "Command not found"
+    return 1
   fi
 }
 
