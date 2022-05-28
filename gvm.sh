@@ -50,8 +50,10 @@ __gvm_default() {
 }
 
 __gvm_reload_shell() {
+  local RC_FILE
+  RC_FILE="$HOME/.$(__gvm_get_shell_name)rc"
   # shellcheck source=/dev/null
-  source "$HOME/.$(__gvm_get_shell_name)rc"
+  [ -f "RC_FILE" ] && source "$RC_FILE"
 }
 
 __gvm_ls() {
