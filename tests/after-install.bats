@@ -2,6 +2,7 @@ setup() {
     GVM_DIR="$HOME/.gvm"
     SH_NAME=$(echo $SHELL | awk '{n=split($1,A,"/"); print A[n]}')
     SH_RC="$HOME/.${SH_NAME}rc"
+    WRONG_VERSION="123"
 
     echo "Debug line: SH_NAME - $SH_NAME, GO_INSTALL_VER - $GO_INSTALL_VER, SH_RC - $SH_RC"
     [ -s "$GVM_DIR/gvm.sh" ] && \. "$GVM_DIR/gvm.sh" || echo "GVM sh not found"
@@ -51,15 +52,55 @@ setup() {
     [ "$output" == "gvm" ]
 }
 
+@test "can't install wrong version $WRONG_VERSION" {
+    run gvm install $WRONG_VERSION
+    [ $status -eq 0 ]
+    ERR_MSG="Go version $WRONG_VERSION not found in repo"
+    [ "$output" == "ERR_MSG" ]
+}
+
 @test "can run gvm install $GO_INSTALL_VER" {
     run gvm install $GO_INSTALL_VER
     [ $status -eq 0 ]
 }
 
+@test "got message when try install $GO_INSTALL_VER again" {
+    run gvm install $GO_INSTALL_VER
+    [ $status -eq 0 ]
+    ERR_MSG="Go verion $GO_INSTALL_VER is already exists"
+    [ "$output" == "$ERR_MSG" ]
+}
+
+@test "Can't use wrong version $WRONG_VERSION" {
+    run gvm use $WRONG_VERSION
+    [ $status -eq 0 ]
+    expect_msg="Can't use Go version $WRONG_VERSION because it's not found in installed list"
+    [ "$output" == "$expect_msg" ]
+}
+
+@test "Can use version $GO_INSTALL_VER" {
+    run gvm use $GO_INSTALL_VER
+    [ $status -eq 0 ]
+    expect_msg="Applied Go version $GO_INSTALL_VER"
+    [ "$output" == "$expect_msg" ]
+}
+
+@test "Can use default version $GO_INSTALL_VER" {
+    run gvm default $GO_INSTALL_VER
+    [ $status -eq 0 ]
+    last_msg=$(echo "$output"| tail -n1)
+    expect_msg="Set default version to $GO_INSTALL_VER"
+    [ "$last_msg" == "$expect_msg" ]
+}
+
+@test ".gvmrc content should be $GO_INSTALL_VER" {
+    content=$(cat "$GVM_DIR/.gvmrc"| tail -n1)
+    [ "$content" == "$GO_INSTALL_VER"" ]
+}
+
 @test "can run gvm ls" {
     run gvm ls
     [ $status -eq 0 ]
-    #[ "$(echo $output| wc -l)" -eq 2 ]
 }
 
 @test "can run gvm info" {
@@ -67,9 +108,15 @@ setup() {
     [ $status -eq 0 ]
 }
 
-@test "can run $rm $GO_INSTALL_VER" {
+@test "can run rm $GO_INSTALL_VER" {
     run gvm rm $GO_INSTALL_VER
     [ $status -eq 0 ]
+}
+
+@test "can run rm $WRONG_VERSION" {
+    run gvm rm $WRONG_VERSION
+    [ $status -eq 0 ]
+    [ "$output" == "Go version $WRONG_VERSION not found" ]
 }
 
 @test "can run gvm ls and expected count of lines eq 1" {
