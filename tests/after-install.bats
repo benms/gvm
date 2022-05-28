@@ -95,7 +95,7 @@ setup() {
 
 @test ".gvmrc content should be $GO_INSTALL_VER" {
     content=$(cat "$GVM_DIR/.gvmrc"| tail -n1)
-    [ "$content" == "$GO_INSTALL_VER"" ]
+    [ "$content" == "$GO_INSTALL_VER" ]
 }
 
 @test "can run gvm ls" {
@@ -108,7 +108,7 @@ setup() {
     [ $status -eq 0 ]
 }
 
-@test "can run rm $GO_INSTALL_VER" {
+@test "can run $rm $GO_INSTALL_VER" {
     run gvm rm $GO_INSTALL_VER
     [ $status -eq 0 ]
 }
