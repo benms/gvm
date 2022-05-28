@@ -56,12 +56,12 @@ __gvm_reload_shell() {
 
 __gvm_ls() {
   echo "GVM Installed versions:"
-  find "${GVM_VERS_DIR}" -maxdepth 1 -mindepth 1 -type d -printf "\t%f\n" | sort -V -r
+  find "${GVM_VERS_DIR}" -maxdepth 1 -mindepth 1 -type d -execdir basename '{}' ';' | awk '{printf "\t"$0"\n"}' |sort -Vr
 }
 
 __gvm_ls_remote() {
   echo "Loading available for installing versions..."
-  curl -s "$GO_DOWNLOAD_URL" | grep "class=\"download\"" | grep linux-amd64 | awk 'match($0, /go[1-9]\.[0-9a-z]+\.?[0-9]+/) { print substr( $0, RSTART, RLENGTH )}' | sort -V -r | awk '{printf "\t"substr($0,3)"\n"}' | less -X
+  curl -s "$GO_DOWNLOAD_URL" | grep "class=\"download\"" | grep linux-amd64 | awk 'match($0, /go[1-9]\.[0-9a-z]+\.?[0-9]+/) { print substr( $0, RSTART, RLENGTH )}' | sort -Vr | awk '{printf "\t"substr($0,3)"\n"}' | less -X
 }
 
 __gvm_rm() {
