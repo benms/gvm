@@ -26,15 +26,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install
-        shell: zsh
         run: |
           apt update && apt install -qy curl
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
-          cat ./gvm.sh >> "$HOME/.bash_profile"
+          echo "$SHELL
 
       - name: Run usage
-        shell: zsh
         run: |
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
