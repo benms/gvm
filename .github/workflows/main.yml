@@ -33,10 +33,13 @@ jobs:
             && rm -rf /var/lib/apt/lists/*
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
-          echo "$SHELL"
 
       - name: Run usage
+        shell: zsh
         run: |
+          ls
+          env
+          echo "======"
           export GVM_DIR=$(eval "echo $GVM_DIR")
           source ./gvm.sh
           echo "====="
