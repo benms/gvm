@@ -37,6 +37,7 @@ jobs:
 
       - name: Run usage
         run: |
+          export GVM_DIR=$(eval "echo $GVM_DIR")
           echo "::set-output name=SELECTED_COLOR::green"
           env
           echo "::set-output name=SELECTED_COLOR::yellow"
