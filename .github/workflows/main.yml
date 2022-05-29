@@ -38,17 +38,13 @@ jobs:
       - name: Run usage
         run: |
           export GVM_DIR=$(eval "echo $GVM_DIR")
-          echo "::set-output name=SELECTED_COLOR::green"
-          env
-          echo "::set-output name=SELECTED_COLOR::yellow"
-          {
-            echo -e "gvm install $GO_INSTALL_VER\n"
-            echo -e "gvm default $GO_INSTALL_VER\n"
-            echo -e "gvm ls\n"
-            echo -e "gvm info\n"
-            echo -e "gvm rm $GO_INSTALL_VER\n"
-          } >> "$HOME/.zshrc"
-          source "$HOME/.zshrc"
+          source ./gvm.sh
+          echo "====="
+          gvm install $GO_INSTALL_VER
+          gvm default $GO_INSTALL_VER
+          gvm ls
+          gvm info
+          gvm rm $GO_INSTALL_VER
 
   usage-tests-bash:
 
