@@ -100,7 +100,7 @@ __gvm_has_cmd() {
 }
 
 __gvm_get_shell_name() {
-  echo "$SHELL" | awk '{n=split($1,A,"/"); print A[n]}'
+  echo "$0" | awk '{n=split($1,A,"/"); print A[n]}'
 }
 
 __gvm_get_current_version() {
