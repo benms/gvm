@@ -100,7 +100,7 @@ __gvm_has_cmd() {
 }
 
 __gvm_get_shell_name() {
-  basename "$SHELL"
+  basename "$SHELL" #cat /proc/$$/cmdline
 }
 
 __gvm_get_current_version() {

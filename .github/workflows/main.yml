@@ -28,11 +28,11 @@ jobs:
       - name: Install
         run: |
           apt update
-          export GVM_DIR=$(echo $GVM_DIR)
+          export GVM_DIR=$(eval "echo $GVM_DIR")
           echo "==========="
           env
           echo "==========="
-          apt install -qy curl
+          apt install -y curl
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
           echo "$SHELL
