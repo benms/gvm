@@ -27,15 +27,15 @@ jobs:
 
       - name: Install
         run: |
-          apt update
           export GVM_DIR=$(eval "echo $GVM_DIR")
-          echo "==========="
           env
           echo "==========="
-          apt install -y curl
+          apt-get update \
+            && apt-get install -y curl \
+            && rm -rf /var/lib/apt/lists/*
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
-          echo "$SHELL
+          echo "$SHELL"
 
       - name: Run usage
         run: |
