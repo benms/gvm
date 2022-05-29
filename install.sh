@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 # Linter: https://www.shellcheck.net/
 
-__gvm_get_shell_name() {
-  basename "$0"
-}
-
-__gvm_reload_shell() {
-  # shellcheck source=/dev/null
-  source "$HOME/.$(__gvm_get_shell_name)rc"
-}
-
 export RC_FILE
-RC_FILE="$HOME/.$(__gvm_get_shell_name)rc"
+RC_FILE=$HOME/.$(basename "$0")rc
 export GVM_DIR="$HOME/.gvm"
 export SHELL_URL=https://raw.githubusercontent.com/benms/gvm/main/gvm.sh
 
