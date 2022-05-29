@@ -27,7 +27,9 @@ jobs:
 
       - name: Install
         run: |
-          apt update && apt install -qy curl
+          apt update
+          env
+          apt install -qy curl
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
           echo "$SHELL
