@@ -28,7 +28,10 @@ jobs:
       - name: Install
         run: |
           apt update
+          export GVM_DIR=$(echo $GVM_DIR)
+          echo "==========="
           env
+          echo "==========="
           apt install -qy curl
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
