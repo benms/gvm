@@ -33,9 +33,7 @@ jobs:
             && rm -rf /var/lib/apt/lists/*
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
-          ls
-          env
-          echo "======"
+          zsh
           source ./gvm.sh
           gvm install $GO_INSTALL_VER
           gvm default $GO_INSTALL_VER
