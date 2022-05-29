@@ -1,5 +1,5 @@
-# gvm
-Golang version manager
+# gvm 
+Golang version manager [![Test](https://github.com/benms/gvm/actions/workflows/main.yml/badge.svg)](https://github.com/benms/gvm/actions/workflows/main.yml)
 
 ## Intro
 
