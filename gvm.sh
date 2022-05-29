@@ -100,7 +100,13 @@ __gvm_has_cmd() {
 }
 
 __gvm_get_shell_name() {
-  basename "$0"
+  local allowed_shells="bash zsh"
+  local shell_name=$(basename "$0")
+  if [[ $allowed_shells =~ (^|[[:space:]])$1($|[[:space:]]) ]]; then
+    echo "$shell_name"
+  else
+    basename "$SHELL"
+  fi
 }
 
 __gvm_get_current_version() {

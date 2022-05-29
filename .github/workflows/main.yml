@@ -15,20 +15,38 @@ env:
 
 jobs:
 
-  # build:
+  usage-tests-zsh:
+    runs-on: ubuntu-latest
 
-    # runs-on: ubuntu-latest
+    container:
+      image: zshusers/zsh
+      env:
+        GVM_DIR: /gvm
+      options: --cpus 1
 
-    # steps:
-    #   - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-      # - name: Install
-      #   shell: bash
-      #   run: |
-      #     mkdir -p "$GVM_DIR/versions"
-      #     touch "$GVM_DIR/.gvmrc"
+      - name: Install
+        shell: bash
+        run: |
+          mkdir -p "$GVM_DIR/versions"
+          touch "$GVM_DIR/.gvmrc"
+          cat ./gvm.sh >> "$HOME/.bash_profile"
 
-  usage-tests:
+      - name: Run usage
+        shell: bash
+        run: |
+          {
+            echo -e "gvm install $GO_INSTALL_VER\n"
+            echo -e "gvm default $GO_INSTALL_VER\n"
+            echo -e "gvm ls\n"
+            echo -e "gvm info\n"
+            echo -e "gvm rm $GO_INSTALL_VER\n"
+          } >> "$HOME/.bash_profile"
+          source "$HOME/.bash_profile"
+
+  usage-tests-bash-through-matrix:
 
     strategy:
       matrix:
@@ -107,8 +125,8 @@ jobs:
     if: always()
 
     needs:
-    # - build
-    - usage-tests
+    - usage-tests-zsh
+    - usage-tests-bash
     - install-tests
     - linters
 
