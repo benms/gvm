@@ -28,12 +28,17 @@ jobs:
       - name: Install
         run: |
           export GVM_DIR=$(eval "echo $GVM_DIR")
+          export SHELL=$(which zsh)
           apt-get update \
             && apt-get install -y curl \
             && rm -rf /var/lib/apt/lists/*
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
+          ls
+          env
+          echo "======"
           zsh
+          echo "======"
           source ./gvm.sh
           gvm install $GO_INSTALL_VER
           gvm default $GO_INSTALL_VER
