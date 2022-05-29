@@ -112,7 +112,9 @@ __gvm_get_current_version() {
 __gvm_info() {
   printf "Env vars:\n"
   env | grep --color=never 'GO\|GVM' | awk -F '=' '{printf "%-25s %s\n", $1,$2}'
-  printf "\nVersion info:\n"
+  printf "\nDefault version info:\n"
+  cat "$GVM_DIR/$GVM_RC_FILE"
+  printf "\nRunning version info:\n"
   go version 2>/dev/null || echo "Golang is not installed"
 }
 
