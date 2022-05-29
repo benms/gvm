@@ -20,22 +20,21 @@ jobs:
 
     container:
       image: zshusers/zsh
-      env:
-        GVM_DIR: /gvm
       options: --cpus 1
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Install
-        shell: bash
+        shell: zsh
         run: |
+          apt update && apt install -qy curl
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
           cat ./gvm.sh >> "$HOME/.bash_profile"
 
       - name: Run usage
-        shell: bash
+        shell: zsh
         run: |
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
