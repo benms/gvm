@@ -28,8 +28,6 @@ jobs:
       - name: Install
         run: |
           export GVM_DIR=$(eval "echo $GVM_DIR")
-          env
-          echo "==========="
           apt-get update \
             && apt-get install -y curl \
             && rm -rf /var/lib/apt/lists/*
@@ -39,14 +37,17 @@ jobs:
 
       - name: Run usage
         run: |
+          echo "::set-output name=SELECTED_COLOR::green"
+          env
+          echo "::set-output name=SELECTED_COLOR::yellow"
           {
             echo -e "gvm install $GO_INSTALL_VER\n"
             echo -e "gvm default $GO_INSTALL_VER\n"
             echo -e "gvm ls\n"
             echo -e "gvm info\n"
             echo -e "gvm rm $GO_INSTALL_VER\n"
-          } >> "$HOME/.bash_profile"
-          source "$HOME/.bash_profile"
+          } >> "$HOME/.zshrc"
+          source "$HOME/.zshrc"
 
   usage-tests-bash:
 
