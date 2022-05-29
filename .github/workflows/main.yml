@@ -46,7 +46,7 @@ jobs:
           } >> "$HOME/.bash_profile"
           source "$HOME/.bash_profile"
 
-  usage-tests-bash-through-matrix:
+  usage-tests-bash:
 
     strategy:
       matrix:
