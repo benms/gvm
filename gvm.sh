@@ -28,8 +28,10 @@ __gvm_install() {
   echo "Extracting archive:"
   tar -C "$PATH_DIR_INST" -xvf "$PATH_ARCH"
   mkdir -p "$PATH_DIR_INST/$GVM_VENDORS_DIR_NAME"
-  printf "\n\nSHA sum of archive:\n"
-  sha256sum "$PATH_ARCH"
+  if [[ "$OS" == "linux" ]]; then
+    printf "\n\nSHA sum of archive:\n"
+    sha256sum "$PATH_ARCH"
+  fi
   rm "$PATH_ARCH"
   printf "\nSuccessfully installed Go version %s\n" "$1"
 }
