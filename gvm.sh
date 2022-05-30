@@ -2,7 +2,10 @@
 # Linter: https://www.shellcheck.net/
 
 __gvm_install() {
-  local FILE=go$1.linux-amd64.tar.gz
+  local OS
+  OS=$(uname)
+  OS=$(echo "$OS" | awk '{print tolower($0)}')
+  local FILE=go${1}.${OS}-amd64.tar.gz
   local PATH_DIR_INST=$GVM_VERS_DIR/$1
   local PATH_ARCH=$GVM_DIR/$FILE
   if [[ -d "$PATH_DIR_INST" ]]; then
@@ -19,12 +22,16 @@ __gvm_install() {
     echo "Repo connection error"
     return 1
   fi
+  echo "Downloading archive:"
   curl -L --output "$PATH_ARCH" "$URL"
   mkdir -p "$PATH_DIR_INST"
+  echo "Extracting archive:"
   tar -C "$PATH_DIR_INST" -xvf "$PATH_ARCH"
   mkdir -p "$PATH_DIR_INST/$GVM_VENDORS_DIR_NAME"
+  printf "\n\nSHA sum of archive:\n"
+  sha256sum "$PATH_ARCH"
   rm "$PATH_ARCH"
-  printf "Successfully installed Go version %s\n" "$1"
+  printf "\nSuccessfully installed Go version %s\n" "$1"
 }
 
 __gvm_install_files() {
