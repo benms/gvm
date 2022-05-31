@@ -1,11 +1,41 @@
 #!/usr/bin/env bash
 # Linter: https://www.shellcheck.net/
 
+__gvm_init_vars() {
+  __gvm_init_machine
+  __gvm_init_os
+  # export GVM_DIR=~/.gvm
+  export GO_VER
+  export GVM_RC_FILE=.gvmrc
+  GO_VER=${GO_VER:-$(__gvm_get_root_version)}
+  export GVM_VERS_DIR=$GVM_DIR/versions
+  export GVM_VENDORS_DIR_NAME=vendors
+  if [[ -n "$GO_VER" ]]; then
+    export GOROOT="$GVM_VERS_DIR/$GO_VER/go"
+    export GOPATH"=$GVM_VERS_DIR/$GO_VER/$GVM_VENDORS_DIR_NAME"
+    export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+  fi
+  export GO_DOWNLOAD_URL=https://go.dev/dl/
+}
+
+__gvm_init_machine() {
+  export GVM_MCN
+  GVM_MCN=$(uname -m)
+  export GVM_MCN_ARCH
+  GVM_MCN_ARCH="$GVM_MCN"
+  if [[ "$GVM_MCN" == "x86_64" ]]; then
+    GVM_MCN_ARCH="amd64"
+  fi
+}
+
+__gvm_init_os() {
+  export GVM_OS
+  GVM_OS=$(uname)
+  GVM_OS=$(echo "$GVM_OS" | awk '{print tolower($0)}')
+}
+
 __gvm_install() {
-  local OS
-  OS=$(uname)
-  OS=$(echo "$OS" | awk '{print tolower($0)}')
-  local FILE=go${1}.${OS}-amd64.tar.gz
+  local FILE=go${1}.${GVM_OS}-${GVM_MCN_ARCH}.tar.gz
   local PATH_DIR_INST=$GVM_VERS_DIR/$1
   local PATH_ARCH=$GVM_DIR/$FILE
   if [[ -d "$PATH_DIR_INST" ]]; then
@@ -28,8 +58,8 @@ __gvm_install() {
   echo "Extracting archive:"
   tar -C "$PATH_DIR_INST" -xvf "$PATH_ARCH"
   mkdir -p "$PATH_DIR_INST/$GVM_VENDORS_DIR_NAME"
-  if [[ "$OS" == "linux" ]]; then
-    printf "\n\nSHA sum of archive:\n"
+  if [[ "$GVM_OS" == "linux" ]]; then
+    printf "\n\nSHA 256 sum of archive:\n"
     sha256sum "$PATH_ARCH"
   fi
   rm "$PATH_ARCH"
@@ -158,6 +188,7 @@ gvm-application() {
 gvm() {
   local all_commands="use ls ls-remote rm info install default"
   local commands_with_versions="default rm install"
+  local HELP_GO_VERS="1.17.10"
 
   if [[ -z "$1" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
     __gvm_help_title
@@ -165,18 +196,18 @@ gvm() {
     printf "\nOptions:\n"
     printf "  -h, --help\t\t\tShow this message and exit\n"
     printf "\nUsage Examples:\n"
-    printf "   Install Golang version 1.17.10\n"
-    printf "   $ gvm install 1.17.10\n"
-    printf "\n   Set and use Golang version 1.17.10 as default\n"
-    printf "   $ gvm default 1.17.10\n"
-    printf "\n   Use Golang version 1.18.2 (works only for current terminal session)\n"
-    printf "   $ gvm use 1.18.2\n"
+    printf "   Install Golang version %s\n" "$HELP_GO_VERS"
+    printf "   $ gvm install %s\n" "$HELP_GO_VERS"
+    printf "\n   Set and use Golang version %s as default\n" "$HELP_GO_VERS"
+    printf "   $ gvm default %s\n" "$HELP_GO_VERS"
+    printf "\n   Use Golang version %s (works only for current terminal session)\n" "$HELP_GO_VERS"
+    printf "   $ gvm use %s\n" "$HELP_GO_VERS"
     printf "\n   Show installed Golang versions available for switching\n"
     printf "   $ gvm ls\n"
     printf "\n   Show all versions that can be installed from go.dev repo\n"
     printf "   $ gvm ls-remote\n"
     printf "\n   Remove installed version\n"
-    printf "   $ gvm rm 1.18.2\n"
+    printf "   $ gvm rm %s\n" "$HELP_GO_VERS"
     printf "\nCommands:\n"
     printf "  use <version>\t\t\tuse the version\n"
     printf "  default <version>\t\tset default the version\n"
@@ -207,15 +238,4 @@ __gvm_no_such_command() {
   printf "\nError: No such command '%s'\n" "$1"
 }
 
-# export GVM_DIR=~/.gvm
-export GO_VER
-export GVM_RC_FILE=.gvmrc
-GO_VER=${GO_VER:-$(__gvm_get_root_version)}
-export GVM_VERS_DIR=$GVM_DIR/versions
-export GVM_VENDORS_DIR_NAME=vendors
-if [[ -n "$GO_VER" ]]; then
-  export GOROOT="$GVM_VERS_DIR/$GO_VER/go"
-  export GOPATH"=$GVM_VERS_DIR/$GO_VER/$GVM_VENDORS_DIR_NAME"
-  export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-fi
-export GO_DOWNLOAD_URL=https://go.dev/dl/
+__gvm_init_vars
