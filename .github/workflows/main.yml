@@ -60,7 +60,6 @@ jobs:
       - name: Install
         shell: bash
         run: |
-          export REPO_IS_PUBLIC="${{github.event.repository.public}} && true || false"
           env
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
