@@ -83,7 +83,7 @@ jobs:
     env:
       INSTALL_URL: "https://raw.githubusercontent.com/benms/gvm/main/install.sh"
       GVM_SH_URL: "https://raw.githubusercontent.com/benms/gvm/main/gvm.sh"
-      EXPECT_DOWNLOAD_STATUS_CODE: "404" #404 200
+      EXPECT_DOWNLOAD_STATUS_CODE: "200" #404 200
       BEGIN_BLOCK: "#-begin-GVM-block-"
       END_BLOCK: "#-end-GVM-block-"
 
@@ -96,12 +96,14 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      # - name: Install
-      #   shell: bash
-      #   run: |
-      #     curl -o- $INSTALL_URL | bash
+      - name: Install
+        if: ${{github.event.repository.public}}
+        shell: bash
+        run: |
+          curl -o- $INSTALL_URL | bash
 
       - name: Install
+        if: ${{!github.event.repository.public}}
         shell: bash
         run: |
           cat ./install.sh | bash
