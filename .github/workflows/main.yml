@@ -12,7 +12,6 @@ on:
 env:
   GO_INSTALL_VER: "1.17.10"
   GVM_DIR: "$HOME/.gvm"
-  REPO_IS_PUBLIC: "${{github.event.repository.public}}"
 
 jobs:
 
@@ -61,6 +60,7 @@ jobs:
       - name: Install
         shell: bash
         run: |
+          export REPO_IS_PUBLIC="${{github.event.repository.public}}"
           env
           mkdir -p "$GVM_DIR/versions"
           touch "$GVM_DIR/.gvmrc"
