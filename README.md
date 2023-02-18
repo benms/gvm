@@ -47,11 +47,11 @@ curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh && . 
 
 After installing gvm, you can use the gvm command to manage your Go installations. Some common commands include:
 
-``sh gvm install <version>: Installs the specified version of Go.```
-``sh gvm use <version>: Sets the specified version of Go as the default version.```
-``sh gvm uninstall <version>: Uninstalls the specified version of Go.```
-``sh gvm list: Lists all installed versions of Go.```
-``sh gvm current: Prints the currently active version of Go.```
+- ```sh gvm install <version>``` Installs the specified version of Go.
+- ```sh gvm use <version>``` Sets the specified version of Go as the default version.
+- ```sh gvm uninstall <version>``` Uninstalls the specified version of Go.
+- ```sh gvm list``` Lists all installed versions of Go.
+- ```sh gvm current``` Prints the currently active version of Go.
 
 For a full list of available commands and options, see the gvm documentation.
 
