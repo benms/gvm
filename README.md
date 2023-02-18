@@ -1,5 +1,5 @@
 # gvm 
-Golang version manager 
+gvm is a version manager for the Go programming language, which allows you to easily install and manage multiple versions of Go on a single machine. With gvm, you can quickly switch between different versions of Go and manage dependencies for each version.
 
 
 [![Test](https://github.com/benms/gvm/actions/workflows/main.yml/badge.svg)](https://github.com/benms/gvm/actions/workflows/main.yml)
@@ -25,9 +25,16 @@ Golang version manager
  Remove installed version
  $ gvm rm 1.18.2
 ```
-## Installing
 
-For installation though the Bash run
+## Prerequisites
+gvm requires the following software to be installed on your system:
+
+- Git (version 1.7 or higher)
+- Bash (version 4.0 or higher)
+
+## Installation
+
+To install gvm, run the following command:
 ```sh
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | bash && . ~/.bashrc
 ```
@@ -36,39 +43,22 @@ For installation though the Zsh run
 curl -o- https://raw.githubusercontent.com/benms/gvm/main/install.sh | zsh && . ~/.zshrc
 ```
 
-## Uninstalling
-<details>
-<summary>Run</summary>
+## Usage
 
-```sh
-gvm-application no-preserve-uninstall
-```
-</details>
+After installing gvm, you can use the gvm command to manage your Go installations. Some common commands include:
 
-## Usage examples
+``sh gvm install <version>: Installs the specified version of Go.```
+``sh gvm use <version>: Sets the specified version of Go as the default version.```
+``sh gvm uninstall <version>: Uninstalls the specified version of Go.```
+``sh gvm list: Lists all installed versions of Go.```
+``sh gvm current: Prints the currently active version of Go.```
 
+For a full list of available commands and options, see the gvm documentation.
 
- Install Golang version 1.17.10
-```sh
-gvm install 1.17.10
-```
- Set and use Golang version 1.17.10 as default
- ```sh
-gvm default 1.17.10
- ```
- Use Golang version 1.18.2 (works only for current terminal session)
-```sh
-gvm use 1.18.2
-```
- Show installed Golang versions available for switching
- ```
-gvm ls
- ```
- Show all versions that can be installed from go.dev repo
- ```sh
-gvm ls-remote
- ```
- Remove installed version
-```sh
-gvm rm 1.18.2
-```
+## Contributing
+
+If you would like to contribute to gvm, please fork the repository and submit a pull request. Before submitting a pull request, please ensure that your changes are well-tested and conform to the existing coding style.
+
+## Contact
+
+For questions or issues related to gvm, please open an issue on the GitHub repository.
